@@ -567,9 +567,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm use default
 
-echo -e "${YELLOW}Initialising bench in frappe-bench folder.${NC}"
+echo -e "${YELLOW}Initialising bench in frappe-bench folder from rabeh-sy fork.${NC}"
 echo -e "${LIGHT_BLUE}If you get a restart failed, don't worry, we will resolve that later.${NC}"
-bench init frappe-bench --version "$bench_version" --verbose
+bench init frappe-bench --version "$bench_version" --frappe-path https://github.com/rabeh-sy/frappe --verbose
 echo -e "${GREEN}Bench installation complete!${NC}"
 sleep 1
 
@@ -603,14 +603,14 @@ if [[ "$bench_version" == "develop" ]]; then
     sleep 1
 fi
 
-echo -e "${LIGHT_BLUE}Would you like to install ERPNext? (yes/no)${NC}"
+echo -e "${LIGHT_BLUE}Would you like to install ERPNext (rabeh-sy fork)? (yes/no)${NC}"
 read -p "Response: " erpnext_install
 erpnext_install=$(echo "$erpnext_install" | tr '[:upper:]' '[:lower:]')
 
 case "$erpnext_install" in
     "yes"|"y")
     sleep 2
-    bench get-app erpnext --branch "$bench_version" && \
+    bench get-app https://github.com/rabeh-sy/erpnext --branch "$bench_version" && \
     bench --site "$site_name" install-app erpnext
     sleep 1
     ;;
